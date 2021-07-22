@@ -17,7 +17,7 @@ public class TestCreditCard {
     @BeforeAll
     public static void setupClass() {
         WebDriverManager.chromedriver().setup();
-       //  System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
+
     }
 
     @BeforeEach
@@ -48,7 +48,7 @@ public class TestCreditCard {
 
         driver.findElement(By.className("button__text")).click();
 
-        String actualText = driver.findElement(By.className("Success_successBlock__2L3Cw")).getText().trim();
+        String actualText = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
         String expectedText = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         Assertions.assertEquals(expectedText, actualText);
     }
