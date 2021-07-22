@@ -52,4 +52,18 @@ public class TestCreditCard {
         String expectedText = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         Assertions.assertEquals(expectedText, actualText);
     }
+
+    @Test
+    void shouldShowMessageAfterSendWrongRequest() {
+        driver.get("http://localhost:9999");
+        WebElement formName = driver.findElement(By.cssSelector("[data-test-id=name]"));
+        formName.findElement(By.cssSelector("[type=\"text\"]")).sendKeys("Ivan");
+
+        driver.findElement(By.className("button__text")).click();
+
+        String actualText = driver.findElement(By.cssSelector("[class=input__sub]")).getText().trim();
+        String expectedText = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
+        Assertions.assertEquals(expectedText, actualText);
+
+    }
 }
